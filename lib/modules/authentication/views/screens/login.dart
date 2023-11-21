@@ -34,20 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ReactiveTextField(
-                    formControlName: 'email',
-                    decoration: getInputDecoration(hintText: 'Email'),
-                    keyboardType: TextInputType.emailAddress,
+                    formControlName: 'userName',
+                    decoration: getInputDecoration(hintText: 'Username'),
+                    keyboardType: TextInputType.name,
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   ReactiveTextField(
                     formControlName: 'password',
-                    obscureText: state.showPassword,
+                    obscureText: !state.showPassword,
                     decoration: getInputDecoration(
                         hintText: 'Password',
                         suffixicon: IconButton(
-                            onPressed: () {},
+                            onPressed: loginController.toggleVisibility,
                             icon: Icon(state.showPassword
                                 ? Icons.visibility
                                 : Icons.visibility_off))),

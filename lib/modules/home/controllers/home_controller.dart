@@ -16,10 +16,14 @@ class HomeController extends Cubit<HomeStateModel> {
     emit(state.copyWith(isLoading: true));
     try {
       print('Calling homefeed api');
-      dynamic result = await respository.fetchData();
+      dynamic result = await respository.fetchHomeData();
+
       emit(state.copyWith(isLoading: false));
       print("Respone from home feed");
       print(result.toString());
+      if (result == null || result == {}) {
+        showSnackBar("Error loading data");
+      }
     } catch (e) {
       emit(state.copyWith(isLoading: false));
       print('Error calling home feed');

@@ -10,7 +10,7 @@ extension NamedRoutesData on NamedRoutes {
       case NamedRoutes.home:
         return '/home';
       default:
-        return "/";
+        return "/home";
     }
   }
 }

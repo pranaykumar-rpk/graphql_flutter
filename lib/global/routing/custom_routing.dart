@@ -24,9 +24,17 @@ class CustomRouting {
     return GoRouter.of(navigatorKey.currentContext!).replaceNamed(route);
   }
 
-  static void replaceStackWithNamed(String route) {
+  static void replaceStackWithRoute(String route) {
+    return GoRouter.of(navigatorKey.currentContext!).go(
+      route,
+    );
+  }
+
+  static void replaceStackWithNamed(String route,
+      {Map<String, dynamic>? arguments, Map<String, String>? pathParams}) {
     //clears the stack and replaces with new route
-    return GoRouter.of(navigatorKey.currentContext!).go(route);
+    return GoRouter.of(navigatorKey.currentContext!).goNamed(route,
+        queryParameters: arguments ?? {}, pathParameters: pathParams ?? {});
   }
 
   static void pop({dynamic result}) {
