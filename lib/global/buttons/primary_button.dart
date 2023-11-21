@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_example/global/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final Function? onPressed;
+  final Function onPressed;
   final Widget? child;
   final double? height;
   final double? width;
@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     Key? key,
     this.height = 65,
-    this.onPressed,
+    required this.onPressed,
     this.child,
     this.width,
     this.borderRadius = 8,

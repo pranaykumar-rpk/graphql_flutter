@@ -22,7 +22,7 @@ class LoginController extends Cubit<LoginStateModel> {
   });
 
   validateCredentials() async {
-    log("Called validate credentials method");
+    print("Called validate credentials method");
     emit(state.copyWith(isLoading: true));
     await Future.delayed(const Duration(seconds: 2), () {
       emit(state.copyWith(isLoading: false));

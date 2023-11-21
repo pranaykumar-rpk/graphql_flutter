@@ -48,7 +48,7 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
                       ? AppColors.primary
                       : AppColors.ashGrey,
                 ),
-                label: 'Account',
+                label: 'Accounts',
               ),
               BottomNavigationBarItem(
                 icon: CommonIcon(

@@ -3,8 +3,11 @@ import 'package:get/instance_manager.dart';
 import 'package:graphql_example/global/routing/route_config.dart';
 import 'package:graphql_example/global/runtime_configs.dart';
 import 'package:graphql_example/global/styles.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initHiveForFlutter();
   runApp(const MyApp());
 }
 
