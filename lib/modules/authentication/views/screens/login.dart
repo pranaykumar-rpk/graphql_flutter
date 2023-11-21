@@ -43,12 +43,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   ReactiveTextField(
                     formControlName: 'password',
+                    obscureText: state.showPassword,
                     decoration: getInputDecoration(
                         hintText: 'Password',
                         suffixicon: IconButton(
                             onPressed: () {},
-                            icon: const Icon(Icons.remove_red_eye))),
-                    keyboardType: TextInputType.emailAddress,
+                            icon: Icon(state.showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off))),
+                    keyboardType: TextInputType.visiblePassword,
                   ),
                   const SizedBox(
                     height: 16,

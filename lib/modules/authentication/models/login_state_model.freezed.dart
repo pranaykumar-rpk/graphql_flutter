@@ -21,6 +21,7 @@ LoginStateModel _$LoginStateModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LoginStateModel {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get showPassword => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $LoginStateModelCopyWith<$Res> {
           LoginStateModel value, $Res Function(LoginStateModel) then) =
       _$LoginStateModelCopyWithImpl<$Res, LoginStateModel>;
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, bool showPassword});
 }
 
 /// @nodoc
@@ -51,11 +52,16 @@ class _$LoginStateModelCopyWithImpl<$Res, $Val extends LoginStateModel>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? showPassword = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -69,7 +75,7 @@ abstract class _$$LoginStateModelImplCopyWith<$Res>
       __$$LoginStateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, bool showPassword});
 }
 
 /// @nodoc
@@ -84,11 +90,16 @@ class __$$LoginStateModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? showPassword = null,
   }) {
     return _then(_$LoginStateModelImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showPassword: null == showPassword
+          ? _value.showPassword
+          : showPassword // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -97,7 +108,7 @@ class __$$LoginStateModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LoginStateModelImpl implements _LoginStateModel {
-  _$LoginStateModelImpl({this.isLoading = false});
+  _$LoginStateModelImpl({this.isLoading = false, this.showPassword = false});
 
   factory _$LoginStateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginStateModelImplFromJson(json);
@@ -105,10 +116,13 @@ class _$LoginStateModelImpl implements _LoginStateModel {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool showPassword;
 
   @override
   String toString() {
-    return 'LoginStateModel(isLoading: $isLoading)';
+    return 'LoginStateModel(isLoading: $isLoading, showPassword: $showPassword)';
   }
 
   @override
@@ -117,12 +131,14 @@ class _$LoginStateModelImpl implements _LoginStateModel {
         (other.runtimeType == runtimeType &&
             other is _$LoginStateModelImpl &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.showPassword, showPassword) ||
+                other.showPassword == showPassword));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading);
+  int get hashCode => Object.hash(runtimeType, isLoading, showPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +156,16 @@ class _$LoginStateModelImpl implements _LoginStateModel {
 }
 
 abstract class _LoginStateModel implements LoginStateModel {
-  factory _LoginStateModel({final bool isLoading}) = _$LoginStateModelImpl;
+  factory _LoginStateModel({final bool isLoading, final bool showPassword}) =
+      _$LoginStateModelImpl;
 
   factory _LoginStateModel.fromJson(Map<String, dynamic> json) =
       _$LoginStateModelImpl.fromJson;
 
   @override
   bool get isLoading;
+  @override
+  bool get showPassword;
   @override
   @JsonKey(ignore: true)
   _$$LoginStateModelImplCopyWith<_$LoginStateModelImpl> get copyWith =>
