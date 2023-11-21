@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AccountDetails extends StatefulWidget {
+
   const AccountDetails({super.key});
 
   @override

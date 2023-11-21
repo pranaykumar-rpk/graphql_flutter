@@ -1,12 +1,15 @@
+import 'dart:convert';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomeRepository {
   final httpLink = HttpLink("http://10.0.2.2:4000/");
 
-  Future<dynamic> fetchHomeData() async {
+  Future<Map<String, dynamic>?>? fetchHomeData() async {
     GraphQLClient client = GraphQLClient(link: httpLink, cache: GraphQLCache());
     print('Calling Queryresult fetch');
-    QueryResult queryResult =
+
+    QueryResult result =
         await client.query(QueryOptions(document: gql("""query getHome {
   home {
     name
@@ -36,14 +39,10 @@ class HomeRepository {
     }
   }
 }
-"""))).then((value) {
-      print("Response from server:");
-      print(value.data.toString());
-      Map<String, dynamic> result = value.data ?? {};
-      return result['home'];
-    }).catchError((e) {
-      print(e.toString());
-      return null;
-    }).timeout(const Duration(seconds: 10));
+""")));
+    print('Queryresult fetch done');
+    print(result.data.toString());
+    Map<String, dynamic> resultMap = result.data!["home"];
+    return resultMap;
   }
 }

@@ -30,7 +30,7 @@ _$HomeModelImpl _$$HomeModelImplFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       upcomingBills: (json['upcomingBills'] as List<dynamic>?)
-              ?.map((e) => BillsModel.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => TransactionModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );

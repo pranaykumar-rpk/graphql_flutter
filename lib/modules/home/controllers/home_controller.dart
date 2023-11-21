@@ -1,6 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graphql_example/global/constants.dart';
+import 'package:graphql_example/global/helper_functions.dart';
+import 'package:graphql_example/modules/home/models/home_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/repositories/home_repository.dart';
 
@@ -17,12 +18,14 @@ class HomeController extends Cubit<HomeStateModel> {
     try {
       print('Calling homefeed api');
       dynamic result = await respository.fetchHomeData();
-
       emit(state.copyWith(isLoading: false));
       print("Respone from home feed");
       print(result.toString());
       if (result == null || result == {}) {
-        showSnackBar("Error loading data");
+        showSnackBar(title: "Error loading data", type: SnackType.error);
+      } else {
+        HomeModel model = HomeModel.fromJson(result);
+        emit(state.copyWith(homeData: model));
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false));

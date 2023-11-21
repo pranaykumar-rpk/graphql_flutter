@@ -16,7 +16,7 @@ class HomeModel with _$HomeModel {
     String? currency,
     AddressModel? address,
     @Default([]) List<TransactionModel> recentTransactions,
-    @Default([]) List<BillsModel> upcomingBills,
+    @Default([]) List<TransactionModel> upcomingBills,
   }) = _HomeModel;
 
   factory HomeModel.fromJson(Map<String, dynamic> json) =>

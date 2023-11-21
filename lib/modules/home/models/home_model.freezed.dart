@@ -27,7 +27,8 @@ mixin _$HomeModel {
   AddressModel? get address => throw _privateConstructorUsedError;
   List<TransactionModel> get recentTransactions =>
       throw _privateConstructorUsedError;
-  List<BillsModel> get upcomingBills => throw _privateConstructorUsedError;
+  List<TransactionModel> get upcomingBills =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +48,7 @@ abstract class $HomeModelCopyWith<$Res> {
       String? currency,
       AddressModel? address,
       List<TransactionModel> recentTransactions,
-      List<BillsModel> upcomingBills});
+      List<TransactionModel> upcomingBills});
 
   $AddressModelCopyWith<$Res>? get address;
 }
@@ -101,7 +102,7 @@ class _$HomeModelCopyWithImpl<$Res, $Val extends HomeModel>
       upcomingBills: null == upcomingBills
           ? _value.upcomingBills
           : upcomingBills // ignore: cast_nullable_to_non_nullable
-              as List<BillsModel>,
+              as List<TransactionModel>,
     ) as $Val);
   }
 
@@ -133,7 +134,7 @@ abstract class _$$HomeModelImplCopyWith<$Res>
       String? currency,
       AddressModel? address,
       List<TransactionModel> recentTransactions,
-      List<BillsModel> upcomingBills});
+      List<TransactionModel> upcomingBills});
 
   @override
   $AddressModelCopyWith<$Res>? get address;
@@ -186,7 +187,7 @@ class __$$HomeModelImplCopyWithImpl<$Res>
       upcomingBills: null == upcomingBills
           ? _value._upcomingBills
           : upcomingBills // ignore: cast_nullable_to_non_nullable
-              as List<BillsModel>,
+              as List<TransactionModel>,
     ));
   }
 }
@@ -201,7 +202,7 @@ class _$HomeModelImpl implements _HomeModel {
       this.currency,
       this.address,
       final List<TransactionModel> recentTransactions = const [],
-      final List<BillsModel> upcomingBills = const []})
+      final List<TransactionModel> upcomingBills = const []})
       : _recentTransactions = recentTransactions,
         _upcomingBills = upcomingBills;
 
@@ -228,10 +229,10 @@ class _$HomeModelImpl implements _HomeModel {
     return EqualUnmodifiableListView(_recentTransactions);
   }
 
-  final List<BillsModel> _upcomingBills;
+  final List<TransactionModel> _upcomingBills;
   @override
   @JsonKey()
-  List<BillsModel> get upcomingBills {
+  List<TransactionModel> get upcomingBills {
     if (_upcomingBills is EqualUnmodifiableListView) return _upcomingBills;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_upcomingBills);
@@ -294,7 +295,7 @@ abstract class _HomeModel implements HomeModel {
       final String? currency,
       final AddressModel? address,
       final List<TransactionModel> recentTransactions,
-      final List<BillsModel> upcomingBills}) = _$HomeModelImpl;
+      final List<TransactionModel> upcomingBills}) = _$HomeModelImpl;
 
   factory _HomeModel.fromJson(Map<String, dynamic> json) =
       _$HomeModelImpl.fromJson;
@@ -312,7 +313,7 @@ abstract class _HomeModel implements HomeModel {
   @override
   List<TransactionModel> get recentTransactions;
   @override
-  List<BillsModel> get upcomingBills;
+  List<TransactionModel> get upcomingBills;
   @override
   @JsonKey(ignore: true)
   _$$HomeModelImplCopyWith<_$HomeModelImpl> get copyWith =>

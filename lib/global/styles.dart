@@ -4,6 +4,12 @@ import 'package:graphql_example/global/app_colors.dart';
 const TextStyle appBarTitleTextStyle =
     TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
 
+TextStyle snackDescription = const TextStyle(
+  color: AppColors.white,
+  fontSize: 15,
+  fontWeight: FontWeight.w500,
+);
+
 ThemeData appTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,

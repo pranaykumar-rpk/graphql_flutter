@@ -22,6 +22,10 @@ HomeStateModel _$HomeStateModelFromJson(Map<String, dynamic> json) {
 mixin _$HomeStateModel {
   int get selectedIndex => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  HomeModel? get homeData => throw _privateConstructorUsedError;
+  List<TransactionModel> get transactions => throw _privateConstructorUsedError;
+  List<AccountModel> get accounts => throw _privateConstructorUsedError;
+  List<StatementModel> get statements => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +39,15 @@ abstract class $HomeStateModelCopyWith<$Res> {
           HomeStateModel value, $Res Function(HomeStateModel) then) =
       _$HomeStateModelCopyWithImpl<$Res, HomeStateModel>;
   @useResult
-  $Res call({int selectedIndex, bool isLoading});
+  $Res call(
+      {int selectedIndex,
+      bool isLoading,
+      HomeModel? homeData,
+      List<TransactionModel> transactions,
+      List<AccountModel> accounts,
+      List<StatementModel> statements});
+
+  $HomeModelCopyWith<$Res>? get homeData;
 }
 
 /// @nodoc
@@ -53,6 +65,10 @@ class _$HomeStateModelCopyWithImpl<$Res, $Val extends HomeStateModel>
   $Res call({
     Object? selectedIndex = null,
     Object? isLoading = null,
+    Object? homeData = freezed,
+    Object? transactions = null,
+    Object? accounts = null,
+    Object? statements = null,
   }) {
     return _then(_value.copyWith(
       selectedIndex: null == selectedIndex
@@ -63,7 +79,35 @@ class _$HomeStateModelCopyWithImpl<$Res, $Val extends HomeStateModel>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      homeData: freezed == homeData
+          ? _value.homeData
+          : homeData // ignore: cast_nullable_to_non_nullable
+              as HomeModel?,
+      transactions: null == transactions
+          ? _value.transactions
+          : transactions // ignore: cast_nullable_to_non_nullable
+              as List<TransactionModel>,
+      accounts: null == accounts
+          ? _value.accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<AccountModel>,
+      statements: null == statements
+          ? _value.statements
+          : statements // ignore: cast_nullable_to_non_nullable
+              as List<StatementModel>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HomeModelCopyWith<$Res>? get homeData {
+    if (_value.homeData == null) {
+      return null;
+    }
+
+    return $HomeModelCopyWith<$Res>(_value.homeData!, (value) {
+      return _then(_value.copyWith(homeData: value) as $Val);
+    });
   }
 }
 
@@ -75,7 +119,16 @@ abstract class _$$HomeStateModelImplCopyWith<$Res>
       __$$HomeStateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedIndex, bool isLoading});
+  $Res call(
+      {int selectedIndex,
+      bool isLoading,
+      HomeModel? homeData,
+      List<TransactionModel> transactions,
+      List<AccountModel> accounts,
+      List<StatementModel> statements});
+
+  @override
+  $HomeModelCopyWith<$Res>? get homeData;
 }
 
 /// @nodoc
@@ -91,6 +144,10 @@ class __$$HomeStateModelImplCopyWithImpl<$Res>
   $Res call({
     Object? selectedIndex = null,
     Object? isLoading = null,
+    Object? homeData = freezed,
+    Object? transactions = null,
+    Object? accounts = null,
+    Object? statements = null,
   }) {
     return _then(_$HomeStateModelImpl(
       selectedIndex: null == selectedIndex
@@ -101,6 +158,22 @@ class __$$HomeStateModelImplCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      homeData: freezed == homeData
+          ? _value.homeData
+          : homeData // ignore: cast_nullable_to_non_nullable
+              as HomeModel?,
+      transactions: null == transactions
+          ? _value._transactions
+          : transactions // ignore: cast_nullable_to_non_nullable
+              as List<TransactionModel>,
+      accounts: null == accounts
+          ? _value._accounts
+          : accounts // ignore: cast_nullable_to_non_nullable
+              as List<AccountModel>,
+      statements: null == statements
+          ? _value._statements
+          : statements // ignore: cast_nullable_to_non_nullable
+              as List<StatementModel>,
     ));
   }
 }
@@ -108,7 +181,16 @@ class __$$HomeStateModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$HomeStateModelImpl implements _HomeStateModel {
-  _$HomeStateModelImpl({this.selectedIndex = 0, this.isLoading = false});
+  _$HomeStateModelImpl(
+      {this.selectedIndex = 0,
+      this.isLoading = false,
+      this.homeData,
+      final List<TransactionModel> transactions = const [],
+      final List<AccountModel> accounts = const [],
+      final List<StatementModel> statements = const []})
+      : _transactions = transactions,
+        _accounts = accounts,
+        _statements = statements;
 
   factory _$HomeStateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeStateModelImplFromJson(json);
@@ -119,10 +201,38 @@ class _$HomeStateModelImpl implements _HomeStateModel {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  final HomeModel? homeData;
+  final List<TransactionModel> _transactions;
+  @override
+  @JsonKey()
+  List<TransactionModel> get transactions {
+    if (_transactions is EqualUnmodifiableListView) return _transactions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_transactions);
+  }
+
+  final List<AccountModel> _accounts;
+  @override
+  @JsonKey()
+  List<AccountModel> get accounts {
+    if (_accounts is EqualUnmodifiableListView) return _accounts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_accounts);
+  }
+
+  final List<StatementModel> _statements;
+  @override
+  @JsonKey()
+  List<StatementModel> get statements {
+    if (_statements is EqualUnmodifiableListView) return _statements;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_statements);
+  }
 
   @override
   String toString() {
-    return 'HomeStateModel(selectedIndex: $selectedIndex, isLoading: $isLoading)';
+    return 'HomeStateModel(selectedIndex: $selectedIndex, isLoading: $isLoading, homeData: $homeData, transactions: $transactions, accounts: $accounts, statements: $statements)';
   }
 
   @override
@@ -133,12 +243,26 @@ class _$HomeStateModelImpl implements _HomeStateModel {
             (identical(other.selectedIndex, selectedIndex) ||
                 other.selectedIndex == selectedIndex) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.homeData, homeData) ||
+                other.homeData == homeData) &&
+            const DeepCollectionEquality()
+                .equals(other._transactions, _transactions) &&
+            const DeepCollectionEquality().equals(other._accounts, _accounts) &&
+            const DeepCollectionEquality()
+                .equals(other._statements, _statements));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, selectedIndex, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType,
+      selectedIndex,
+      isLoading,
+      homeData,
+      const DeepCollectionEquality().hash(_transactions),
+      const DeepCollectionEquality().hash(_accounts),
+      const DeepCollectionEquality().hash(_statements));
 
   @JsonKey(ignore: true)
   @override
@@ -156,8 +280,13 @@ class _$HomeStateModelImpl implements _HomeStateModel {
 }
 
 abstract class _HomeStateModel implements HomeStateModel {
-  factory _HomeStateModel({final int selectedIndex, final bool isLoading}) =
-      _$HomeStateModelImpl;
+  factory _HomeStateModel(
+      {final int selectedIndex,
+      final bool isLoading,
+      final HomeModel? homeData,
+      final List<TransactionModel> transactions,
+      final List<AccountModel> accounts,
+      final List<StatementModel> statements}) = _$HomeStateModelImpl;
 
   factory _HomeStateModel.fromJson(Map<String, dynamic> json) =
       _$HomeStateModelImpl.fromJson;
@@ -166,6 +295,14 @@ abstract class _HomeStateModel implements HomeStateModel {
   int get selectedIndex;
   @override
   bool get isLoading;
+  @override
+  HomeModel? get homeData;
+  @override
+  List<TransactionModel> get transactions;
+  @override
+  List<AccountModel> get accounts;
+  @override
+  List<StatementModel> get statements;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateModelImplCopyWith<_$HomeStateModelImpl> get copyWith =>
