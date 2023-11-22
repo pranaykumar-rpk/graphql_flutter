@@ -67,15 +67,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       Expanded(
                         child: TabBarView(children: [
                           const AccountTransactions(),
-                          Card(
-                            child: Column(
-                              children: [
-                                Text(widget.accountHolder ?? 'Name'),
-                                Text(widget.accountNumber ?? '123'),
-                                Text(widget.accountType ?? 'Savings'),
-                                Text((widget.balance ?? 0).toString()),
-                                Text(widget.id ?? '123')
-                              ],
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Card(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(widget.accountHolder ?? 'Name'),
+                                  Text(widget.accountNumber ?? '123'),
+                                  Text(widget.accountType ?? 'Savings'),
+                                  Text((widget.balance ?? 0).toString()),
+                                  Text(widget.id ?? '123')
+                                ],
+                              ),
                             ),
                           )
                         ]),

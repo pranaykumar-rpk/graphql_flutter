@@ -94,4 +94,28 @@ query getTransactions {
     //     result.data!["accounts"] as List<Map<String, dynamic>>;
     return result.data;
   }
+
+  fetchStatementsData() async {
+    GraphQLClient client = GraphQLClient(link: httpLink, cache: GraphQLCache());
+    print('Calling Queryresult fetch');
+
+    QueryResult result = await client.query(QueryOptions(document: gql("""
+query getStatements {
+  statements {
+    date
+    description
+    amount
+  }
+}
+
+""")));
+
+    print('Queryresult fetch done');
+    print(result.data.toString());
+    //print data type of result.data[accounts]
+    print(result.data!["statements"].runtimeType);
+    // List<Map<String, dynamic>> resultMap =
+    //     result.data!["accounts"] as List<Map<String, dynamic>>;
+    return result.data;
+  }
 }

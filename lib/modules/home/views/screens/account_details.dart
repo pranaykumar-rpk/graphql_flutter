@@ -23,7 +23,9 @@ class _AccountDetailsState extends State<AccountDetails> {
   @override
   void initState() {
     print("Account details init state was called");
-    controller.fetchAcoountDetails();
+    if (controller.state.accounts.isEmpty) {
+      controller.fetchAcoountDetails();
+    }
     super.initState();
   }
 

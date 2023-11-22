@@ -24,7 +24,9 @@ class _HomeDetailsState extends State<HomeDetails> {
   @override
   void initState() {
     print("Home details init state was called");
-    homeController.fetchData();
+    if (homeController.state.homeData == null) {
+      homeController.fetchData();
+    }
     super.initState();
   }
 

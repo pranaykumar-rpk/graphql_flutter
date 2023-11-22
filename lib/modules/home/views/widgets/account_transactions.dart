@@ -17,7 +17,9 @@ class _AccountTransactionsState extends State<AccountTransactions> {
 
   @override
   void initState() {
-    homeController.fetchTransactions();
+    if (homeController.state.transactions.isEmpty) {
+      homeController.fetchTransactions();
+    }
     super.initState();
   }
 
