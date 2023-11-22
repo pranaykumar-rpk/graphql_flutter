@@ -14,6 +14,13 @@ Map<String, dynamic> _$HomeStateModelToJson(HomeStateModel instance) =>
       'transactions': instance.transactions,
       'accounts': instance.accounts,
       'statements': instance.statements,
+      'contacts': instance.contacts,
+      'isLoadingHomeData': instance.isLoadingHomeData,
+      'isLoadingAccountsData': instance.isLoadingAccountsData,
+      'isLoadingTransactionsData': instance.isLoadingTransactionsData,
+      'isLoadingStatementsData': instance.isLoadingStatementsData,
+      'message': instance.message,
+      'isContactsFetchedSuccessfully': instance.isContactsFetchedSuccessfully,
     };
 
 _$HomeStateModelImpl _$$HomeStateModelImplFromJson(Map<String, dynamic> json) =>
@@ -35,6 +42,16 @@ _$HomeStateModelImpl _$$HomeStateModelImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => StatementModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      contacts: json['contacts'] as List<dynamic>? ?? const [],
+      isLoadingHomeData: json['isLoadingHomeData'] as bool? ?? false,
+      isLoadingAccountsData: json['isLoadingAccountsData'] as bool? ?? false,
+      isLoadingTransactionsData:
+          json['isLoadingTransactionsData'] as bool? ?? false,
+      isLoadingStatementsData:
+          json['isLoadingStatementsData'] as bool? ?? false,
+      message: json['message'] as String?,
+      isContactsFetchedSuccessfully:
+          json['isContactsFetchedSuccessfully'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$HomeStateModelImplToJson(
@@ -46,4 +63,11 @@ Map<String, dynamic> _$$HomeStateModelImplToJson(
       'transactions': instance.transactions,
       'accounts': instance.accounts,
       'statements': instance.statements,
+      'contacts': instance.contacts,
+      'isLoadingHomeData': instance.isLoadingHomeData,
+      'isLoadingAccountsData': instance.isLoadingAccountsData,
+      'isLoadingTransactionsData': instance.isLoadingTransactionsData,
+      'isLoadingStatementsData': instance.isLoadingStatementsData,
+      'message': instance.message,
+      'isContactsFetchedSuccessfully': instance.isContactsFetchedSuccessfully,
     };

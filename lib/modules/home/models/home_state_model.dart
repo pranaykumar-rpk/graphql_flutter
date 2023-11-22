@@ -18,6 +18,13 @@ class HomeStateModel with _$HomeStateModel {
     @Default([]) List<TransactionModel> transactions,
     @Default([]) List<AccountModel> accounts,
     @Default([]) List<StatementModel> statements,
+    @Default([]) List contacts,
+    @Default(false) bool isLoadingHomeData,
+    @Default(false) bool isLoadingAccountsData,
+    @Default(false) bool isLoadingTransactionsData,
+    @Default(false) bool isLoadingStatementsData,
+    String? message,
+    @Default(false) bool isContactsFetchedSuccessfully,
   }) = _HomeStateModel;
 
   factory HomeStateModel.fromJson(Map<String, dynamic> json) =>

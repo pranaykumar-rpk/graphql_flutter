@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_example/global/constants.dart';
 import 'package:graphql_example/global/helper_functions.dart';
@@ -5,6 +7,7 @@ import 'package:graphql_example/modules/home/models/account_model.dart';
 import 'package:graphql_example/modules/home/models/accounts_model.dart';
 import 'package:graphql_example/modules/home/models/home_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
+import 'package:graphql_example/modules/home/models/statement_model.dart';
 import 'package:graphql_example/modules/home/models/statements_model.dart';
 import 'package:graphql_example/modules/home/models/transactions_model.dart';
 import 'package:graphql_example/modules/home/repositories/home_repository.dart';
@@ -95,11 +98,47 @@ class HomeController extends Cubit<HomeStateModel> {
       } else {
         StatementsModel model = StatementsModel.fromJson(result);
         emit(state.copyWith(statements: model.statements));
-        
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false));
       print('Error calling home feed');
+      print(e.toString());
+    }
+  }
+
+  Map<String, List<StatementModel>> getStatementsMap() {
+    Map<String, List<StatementModel>> statementsMap = {};
+    for (var element in state.statements) {
+      String year = element.date!.substring(0, 4);
+      if (statementsMap.containsKey(year)) {
+        statementsMap[year]!.add(element);
+      } else {
+        statementsMap[year] = [element];
+      }
+    }
+    return statementsMap;
+  }
+
+  Future<void> fetchContacts() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      print('Calling Contacts api');
+      Map<String, dynamic> result = await respository.fetchContactsData();
+      print('result from contats api: $result');
+      emit(state.copyWith(isLoading: false));
+
+      if (result["isSuccess"] ?? false) {
+      } else {
+        String error = result["message"];
+        emit(state.copyWith(
+            message: error, isContactsFetchedSuccessfully: false));
+        showSnackBar(
+            title: "Something went wrong. Please try again",
+            duration: const Duration(seconds: 5),
+            type: SnackType.error);
+      }
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
       print(e.toString());
     }
   }

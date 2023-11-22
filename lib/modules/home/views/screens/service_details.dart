@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_example/global/constants.dart';
 import 'package:graphql_example/global/helper_functions.dart';
+import 'package:graphql_example/modules/home/views/screens/contacts_screen.dart';
 import 'package:graphql_example/modules/home/views/screens/statements_screen.dart';
 
 class ServiceDetails extends StatefulWidget {
@@ -23,11 +24,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return const Scaffold(
-            body: Center(
-              child: Text('Contacts'),
-            ),
-          );
+          return const ContactsScreen();
         },
       ),
     );

@@ -26,6 +26,13 @@ mixin _$HomeStateModel {
   List<TransactionModel> get transactions => throw _privateConstructorUsedError;
   List<AccountModel> get accounts => throw _privateConstructorUsedError;
   List<StatementModel> get statements => throw _privateConstructorUsedError;
+  List<dynamic> get contacts => throw _privateConstructorUsedError;
+  bool get isLoadingHomeData => throw _privateConstructorUsedError;
+  bool get isLoadingAccountsData => throw _privateConstructorUsedError;
+  bool get isLoadingTransactionsData => throw _privateConstructorUsedError;
+  bool get isLoadingStatementsData => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  bool get isContactsFetchedSuccessfully => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +52,14 @@ abstract class $HomeStateModelCopyWith<$Res> {
       HomeModel? homeData,
       List<TransactionModel> transactions,
       List<AccountModel> accounts,
-      List<StatementModel> statements});
+      List<StatementModel> statements,
+      List<dynamic> contacts,
+      bool isLoadingHomeData,
+      bool isLoadingAccountsData,
+      bool isLoadingTransactionsData,
+      bool isLoadingStatementsData,
+      String? message,
+      bool isContactsFetchedSuccessfully});
 
   $HomeModelCopyWith<$Res>? get homeData;
 }
@@ -69,6 +83,13 @@ class _$HomeStateModelCopyWithImpl<$Res, $Val extends HomeStateModel>
     Object? transactions = null,
     Object? accounts = null,
     Object? statements = null,
+    Object? contacts = null,
+    Object? isLoadingHomeData = null,
+    Object? isLoadingAccountsData = null,
+    Object? isLoadingTransactionsData = null,
+    Object? isLoadingStatementsData = null,
+    Object? message = freezed,
+    Object? isContactsFetchedSuccessfully = null,
   }) {
     return _then(_value.copyWith(
       selectedIndex: null == selectedIndex
@@ -95,6 +116,34 @@ class _$HomeStateModelCopyWithImpl<$Res, $Val extends HomeStateModel>
           ? _value.statements
           : statements // ignore: cast_nullable_to_non_nullable
               as List<StatementModel>,
+      contacts: null == contacts
+          ? _value.contacts
+          : contacts // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      isLoadingHomeData: null == isLoadingHomeData
+          ? _value.isLoadingHomeData
+          : isLoadingHomeData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingAccountsData: null == isLoadingAccountsData
+          ? _value.isLoadingAccountsData
+          : isLoadingAccountsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingTransactionsData: null == isLoadingTransactionsData
+          ? _value.isLoadingTransactionsData
+          : isLoadingTransactionsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingStatementsData: null == isLoadingStatementsData
+          ? _value.isLoadingStatementsData
+          : isLoadingStatementsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isContactsFetchedSuccessfully: null == isContactsFetchedSuccessfully
+          ? _value.isContactsFetchedSuccessfully
+          : isContactsFetchedSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -125,7 +174,14 @@ abstract class _$$HomeStateModelImplCopyWith<$Res>
       HomeModel? homeData,
       List<TransactionModel> transactions,
       List<AccountModel> accounts,
-      List<StatementModel> statements});
+      List<StatementModel> statements,
+      List<dynamic> contacts,
+      bool isLoadingHomeData,
+      bool isLoadingAccountsData,
+      bool isLoadingTransactionsData,
+      bool isLoadingStatementsData,
+      String? message,
+      bool isContactsFetchedSuccessfully});
 
   @override
   $HomeModelCopyWith<$Res>? get homeData;
@@ -148,6 +204,13 @@ class __$$HomeStateModelImplCopyWithImpl<$Res>
     Object? transactions = null,
     Object? accounts = null,
     Object? statements = null,
+    Object? contacts = null,
+    Object? isLoadingHomeData = null,
+    Object? isLoadingAccountsData = null,
+    Object? isLoadingTransactionsData = null,
+    Object? isLoadingStatementsData = null,
+    Object? message = freezed,
+    Object? isContactsFetchedSuccessfully = null,
   }) {
     return _then(_$HomeStateModelImpl(
       selectedIndex: null == selectedIndex
@@ -174,6 +237,34 @@ class __$$HomeStateModelImplCopyWithImpl<$Res>
           ? _value._statements
           : statements // ignore: cast_nullable_to_non_nullable
               as List<StatementModel>,
+      contacts: null == contacts
+          ? _value._contacts
+          : contacts // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      isLoadingHomeData: null == isLoadingHomeData
+          ? _value.isLoadingHomeData
+          : isLoadingHomeData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingAccountsData: null == isLoadingAccountsData
+          ? _value.isLoadingAccountsData
+          : isLoadingAccountsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingTransactionsData: null == isLoadingTransactionsData
+          ? _value.isLoadingTransactionsData
+          : isLoadingTransactionsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingStatementsData: null == isLoadingStatementsData
+          ? _value.isLoadingStatementsData
+          : isLoadingStatementsData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isContactsFetchedSuccessfully: null == isContactsFetchedSuccessfully
+          ? _value.isContactsFetchedSuccessfully
+          : isContactsFetchedSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -187,10 +278,18 @@ class _$HomeStateModelImpl implements _HomeStateModel {
       this.homeData,
       final List<TransactionModel> transactions = const [],
       final List<AccountModel> accounts = const [],
-      final List<StatementModel> statements = const []})
+      final List<StatementModel> statements = const [],
+      final List<dynamic> contacts = const [],
+      this.isLoadingHomeData = false,
+      this.isLoadingAccountsData = false,
+      this.isLoadingTransactionsData = false,
+      this.isLoadingStatementsData = false,
+      this.message,
+      this.isContactsFetchedSuccessfully = false})
       : _transactions = transactions,
         _accounts = accounts,
-        _statements = statements;
+        _statements = statements,
+        _contacts = contacts;
 
   factory _$HomeStateModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$HomeStateModelImplFromJson(json);
@@ -230,9 +329,36 @@ class _$HomeStateModelImpl implements _HomeStateModel {
     return EqualUnmodifiableListView(_statements);
   }
 
+  final List<dynamic> _contacts;
+  @override
+  @JsonKey()
+  List<dynamic> get contacts {
+    if (_contacts is EqualUnmodifiableListView) return _contacts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contacts);
+  }
+
+  @override
+  @JsonKey()
+  final bool isLoadingHomeData;
+  @override
+  @JsonKey()
+  final bool isLoadingAccountsData;
+  @override
+  @JsonKey()
+  final bool isLoadingTransactionsData;
+  @override
+  @JsonKey()
+  final bool isLoadingStatementsData;
+  @override
+  final String? message;
+  @override
+  @JsonKey()
+  final bool isContactsFetchedSuccessfully;
+
   @override
   String toString() {
-    return 'HomeStateModel(selectedIndex: $selectedIndex, isLoading: $isLoading, homeData: $homeData, transactions: $transactions, accounts: $accounts, statements: $statements)';
+    return 'HomeStateModel(selectedIndex: $selectedIndex, isLoading: $isLoading, homeData: $homeData, transactions: $transactions, accounts: $accounts, statements: $statements, contacts: $contacts, isLoadingHomeData: $isLoadingHomeData, isLoadingAccountsData: $isLoadingAccountsData, isLoadingTransactionsData: $isLoadingTransactionsData, isLoadingStatementsData: $isLoadingStatementsData, message: $message, isContactsFetchedSuccessfully: $isContactsFetchedSuccessfully)';
   }
 
   @override
@@ -250,7 +376,23 @@ class _$HomeStateModelImpl implements _HomeStateModel {
                 .equals(other._transactions, _transactions) &&
             const DeepCollectionEquality().equals(other._accounts, _accounts) &&
             const DeepCollectionEquality()
-                .equals(other._statements, _statements));
+                .equals(other._statements, _statements) &&
+            const DeepCollectionEquality().equals(other._contacts, _contacts) &&
+            (identical(other.isLoadingHomeData, isLoadingHomeData) ||
+                other.isLoadingHomeData == isLoadingHomeData) &&
+            (identical(other.isLoadingAccountsData, isLoadingAccountsData) ||
+                other.isLoadingAccountsData == isLoadingAccountsData) &&
+            (identical(other.isLoadingTransactionsData,
+                    isLoadingTransactionsData) ||
+                other.isLoadingTransactionsData == isLoadingTransactionsData) &&
+            (identical(
+                    other.isLoadingStatementsData, isLoadingStatementsData) ||
+                other.isLoadingStatementsData == isLoadingStatementsData) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.isContactsFetchedSuccessfully,
+                    isContactsFetchedSuccessfully) ||
+                other.isContactsFetchedSuccessfully ==
+                    isContactsFetchedSuccessfully));
   }
 
   @JsonKey(ignore: true)
@@ -262,7 +404,14 @@ class _$HomeStateModelImpl implements _HomeStateModel {
       homeData,
       const DeepCollectionEquality().hash(_transactions),
       const DeepCollectionEquality().hash(_accounts),
-      const DeepCollectionEquality().hash(_statements));
+      const DeepCollectionEquality().hash(_statements),
+      const DeepCollectionEquality().hash(_contacts),
+      isLoadingHomeData,
+      isLoadingAccountsData,
+      isLoadingTransactionsData,
+      isLoadingStatementsData,
+      message,
+      isContactsFetchedSuccessfully);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +435,14 @@ abstract class _HomeStateModel implements HomeStateModel {
       final HomeModel? homeData,
       final List<TransactionModel> transactions,
       final List<AccountModel> accounts,
-      final List<StatementModel> statements}) = _$HomeStateModelImpl;
+      final List<StatementModel> statements,
+      final List<dynamic> contacts,
+      final bool isLoadingHomeData,
+      final bool isLoadingAccountsData,
+      final bool isLoadingTransactionsData,
+      final bool isLoadingStatementsData,
+      final String? message,
+      final bool isContactsFetchedSuccessfully}) = _$HomeStateModelImpl;
 
   factory _HomeStateModel.fromJson(Map<String, dynamic> json) =
       _$HomeStateModelImpl.fromJson;
@@ -303,6 +459,20 @@ abstract class _HomeStateModel implements HomeStateModel {
   List<AccountModel> get accounts;
   @override
   List<StatementModel> get statements;
+  @override
+  List<dynamic> get contacts;
+  @override
+  bool get isLoadingHomeData;
+  @override
+  bool get isLoadingAccountsData;
+  @override
+  bool get isLoadingTransactionsData;
+  @override
+  bool get isLoadingStatementsData;
+  @override
+  String? get message;
+  @override
+  bool get isContactsFetchedSuccessfully;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateModelImplCopyWith<_$HomeStateModelImpl> get copyWith =>

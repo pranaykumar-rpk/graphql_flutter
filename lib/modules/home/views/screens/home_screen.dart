@@ -7,6 +7,7 @@ import 'package:graphql_example/modules/home/controllers/home_controller.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/views/screens/account_details.dart';
 import 'package:graphql_example/modules/home/views/screens/home_details.dart';
+import 'package:graphql_example/modules/home/views/screens/pdf_viewer_screen.dart';
 import 'package:graphql_example/modules/home/views/screens/service_details.dart';
 import 'package:graphql_example/modules/home/views/widgets/home_bottom_navigation.dart';
 

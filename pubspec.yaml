@@ -43,6 +43,7 @@ dependencies:
   go_router: ^12.1.1
   graphql_flutter: ^5.1.2
   flash: ^3.0.5+2
+  syncfusion_flutter_pdfviewer: ^21.2.3
 
 dev_dependencies:
   flutter_test:
@@ -95,5 +96,6 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
