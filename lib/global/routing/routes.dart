@@ -1,4 +1,4 @@
-enum NamedRoutes { splash, login, home }
+enum NamedRoutes { splash, login, home, transactions }
 
 extension NamedRoutesData on NamedRoutes {
   String get path {
@@ -9,6 +9,8 @@ extension NamedRoutesData on NamedRoutes {
         return '/login';
       case NamedRoutes.home:
         return '/home';
+      case NamedRoutes.transactions:
+        return 'transactions';
       default:
         return "/home";
     }

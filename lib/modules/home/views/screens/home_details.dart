@@ -36,7 +36,7 @@ class _HomeDetailsState extends State<HomeDetails> {
           return Scaffold(
             appBar: AppBar(title: Text(widget.title), actions: [
               IconButton(
-                  icon: const Icon(Icons.refresh),
+                  icon: const Icon(Icons.refresh, color: AppColors.white),
                   onPressed: () {
                     homeController.fetchData();
                   })

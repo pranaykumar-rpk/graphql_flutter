@@ -4,6 +4,8 @@ import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/global/runtime_configs.dart';
 import 'package:graphql_example/modules/authentication/views/screens/login.dart';
 import 'package:graphql_example/modules/home/views/screens/home_screen.dart';
+import 'package:graphql_example/modules/home/views/screens/transactions_screen.dart';
+import 'package:graphql_example/modules/home/views/widgets/transaction_list.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: NamedRoutes.login.path,
@@ -16,10 +18,17 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: NamedRoutes.home.path,
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
-      },
-    ),
+        path: NamedRoutes.home.path,
+        builder: (BuildContext context, GoRouterState state) {
+          return const HomeScreen();
+        },
+        routes: [
+          GoRoute(
+            path: NamedRoutes.transactions.path,
+            builder: (BuildContext context, GoRouterState state) {
+              return const TransactionsScreen();
+            },
+          ),
+        ]),
   ],
 );

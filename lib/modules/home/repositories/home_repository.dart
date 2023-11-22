@@ -45,4 +45,53 @@ class HomeRepository {
     Map<String, dynamic> resultMap = result.data!["home"];
     return resultMap;
   }
+
+  fetchAccountsData() async {
+    GraphQLClient client = GraphQLClient(link: httpLink, cache: GraphQLCache());
+    print('Calling Queryresult fetch');
+
+    QueryResult result =
+        await client.query(QueryOptions(document: gql("""query getAccounts {
+  accounts {
+    id
+    accountNumber
+    accountType
+    balance
+    accountHolder
+  }
+}""")));
+    print('Queryresult fetch done');
+    print(result.data.toString());
+    //print data type of result.data[accounts]
+    print(result.data!["accounts"].runtimeType);
+
+    // List<Map<String, dynamic>> resultMap =
+    //     result.data!["accounts"] as List<Map<String, dynamic>>;
+
+    return result.data;
+  }
+
+  fetchTransactionsData() async {
+    GraphQLClient client = GraphQLClient(link: httpLink, cache: GraphQLCache());
+    print('Calling Queryresult fetch');
+
+    QueryResult result = await client.query(QueryOptions(document: gql("""
+query getTransactions {
+  transactions {
+    date
+    description
+    amount
+    fromAccount
+    toAccount
+  }
+}
+""")));
+    print('Queryresult fetch done');
+    print(result.data.toString());
+    //print data type of result.data[accounts]
+    print(result.data!["transactions"].runtimeType);
+    // List<Map<String, dynamic>> resultMap =
+    //     result.data!["accounts"] as List<Map<String, dynamic>>;
+    return result.data;
+  }
 }

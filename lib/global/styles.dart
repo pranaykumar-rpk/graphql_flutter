@@ -14,6 +14,7 @@ ThemeData appTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,
     appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(color: AppColors.white),
         backgroundColor: AppColors.primary,
         titleTextStyle: TextStyle(color: AppColors.white, fontSize: 16)));
 

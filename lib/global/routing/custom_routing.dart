@@ -16,7 +16,8 @@ class CustomRouting {
       {dynamic arguments, dynamic pathParams}) {
     //To goto next screen without clearing the stack
     return GoRouter.of(navigatorKey.currentContext!).pushNamed(route,
-        queryParameters: arguments, pathParameters: pathParams);
+        queryParameters: arguments ?? {},
+        pathParameters: (pathParams ?? <String, String>{}));
   }
 
   static Future<void> replaceWithNamed(String route) {
