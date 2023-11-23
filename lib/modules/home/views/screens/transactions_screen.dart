@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_example/modules/home/views/screens/account_details.dart';
 import 'package:graphql_example/modules/home/views/widgets/account_transactions.dart';
 import 'package:graphql_example/modules/home/views/widgets/title_value_widget.dart';
-import 'package:graphql_example/modules/home/views/widgets/transaction_list.dart';
 
 class TransactionsScreen extends StatefulWidget {
   final String? accountNumber;
   final String? id;
   final String? accountType;
-  final double? balance;
+  final String? balance;
   final String? accountHolder;
   const TransactionsScreen(
       {super.key,
@@ -68,19 +66,48 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                         child: TabBarView(children: [
                           const AccountTransactions(),
                           Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(widget.accountHolder ?? 'Name'),
-                                  Text(widget.accountNumber ?? '123'),
-                                  Text(widget.accountType ?? 'Savings'),
-                                  Text((widget.balance ?? 0).toString()),
-                                  Text(widget.id ?? '123')
-                                ],
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TitleValueWidget(
+                                        useColumn: true,
+                                        title: 'Name',
+                                        value: widget.accountHolder ?? ''),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TitleValueWidget(
+                                        useColumn: true,
+                                        title: 'Account number',
+                                        value: widget.accountNumber ?? ''),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TitleValueWidget(
+                                        useColumn: true,
+                                        title: 'Account type',
+                                        value: widget.accountType ?? ''),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TitleValueWidget(
+                                        useColumn: true,
+                                        title: 'Balance',
+                                        value:
+                                            (widget.balance ?? 0).toString()),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    TitleValueWidget(
+                                        useColumn: true,
+                                        title: 'ID',
+                                        value: widget.id ?? ''),
+                                  ],
+                                ),
                               ),
                             ),
                           )

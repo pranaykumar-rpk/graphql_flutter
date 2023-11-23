@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_example/global/constants.dart';
 import 'package:graphql_example/global/helper_functions.dart';
+import 'package:graphql_example/global/routing/custom_routing.dart';
+import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/modules/home/views/screens/contacts_screen.dart';
 import 'package:graphql_example/modules/home/views/screens/statements_screen.dart';
 
@@ -20,25 +22,19 @@ class _ServiceDetailsState extends State<ServiceDetails> {
   }
 
   void _handleContactsTap() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return const ContactsScreen();
-        },
-      ),
-    );
+    CustomRouting.pushNamed(NamedRoutes.contacts.path);
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) {
+    //       return const ContactsScreen();
+    //     },
+    //   ),
+    // );
   }
 
   void _handleStatementTap() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return const StatementsScreen();
-        },
-      ),
-    );
+    CustomRouting.pushNamed(NamedRoutes.statements.path);
   }
 
   @override

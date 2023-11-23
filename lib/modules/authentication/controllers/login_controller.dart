@@ -12,13 +12,13 @@ import 'package:reactive_forms/reactive_forms.dart';
 class LoginController extends Cubit<LoginStateModel> {
   LoginController() : super(LoginStateModel());
 
-  FormGroup loginForm = FormGroup({
-    'userName': FormControl<String>(validators: [
-      Validators.required,
-    ]),
+  FormGroup loginForm = FormGroup(
+    {
+    'userName': FormControl<String>(
+        validators: [Validators.required, Validators.minLength(4)]),
     'password': FormControl<String>(validators: [
       Validators.required,
-      Validators.minLength(8),
+      Validators.minLength(6),
     ]),
   });
 
@@ -27,18 +27,10 @@ class LoginController extends Cubit<LoginStateModel> {
     emit(state.copyWith(isLoading: true));
     await Future.delayed(const Duration(seconds: 2), () {
       emit(state.copyWith(isLoading: false));
-      // final String location =
-      //     GoRouter.of(RuntimeConfigs.navigatorKey.currentContext!)
-      //         .namedLocation(NamedRoutes.home.path, pathParameters: {
-      //   'userName': loginForm.controls["userName"]!.value as String
-      // });
-      CustomRouting.replaceStackWithRoute(NamedRoutes.home.path);
-      // GoRouter.of(RuntimeConfigs.navigatorKey.currentContext!).go(location);
-      // CustomRouting.replaceStackWithNamed(NamedRoutes.home.path, pathParams: {
-      //   "userName": loginForm.controls["userName"]!.value as String,
-      // }, arguments: {
-      //   "userName": loginForm.controls["userName"]!.value as String,
-      // });
+      RuntimeConfigs.isLoggedIn = true;
+      String userName = (loginForm.controls["userName"]?.value ?? "") as String;
+      CustomRouting.goToRoute(NamedRoutes.home.path,
+          extra: {"userName": userName});
     });
   }
 

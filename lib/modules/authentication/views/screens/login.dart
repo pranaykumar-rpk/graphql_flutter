@@ -37,6 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     formControlName: 'userName',
                     decoration: getInputDecoration(hintText: 'Username'),
                     keyboardType: TextInputType.name,
+                    validationMessages: {
+                      'required': (error) => 'Username is required',
+                      'minLength': (error) => 'Mimumn characters should be 4'
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -44,6 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ReactiveTextField(
                     formControlName: 'password',
                     obscureText: !state.showPassword,
+                    validationMessages: {
+                      'required': (error) => 'Password is required',
+                      'minLength': (error) => 'Mimumn characters should be 6'
+                    },
                     decoration: getInputDecoration(
                         hintText: 'Password',
                         suffixicon: IconButton(
@@ -60,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) {
                       return PrimaryButton(
-                        // isDisabled: formGroup.invalid,
+                        isDisabled: formGroup.invalid,
                         isLoading: state.isLoading,
                         height: 50,
                         onPressed: loginController.validateCredentials,

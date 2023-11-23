@@ -13,10 +13,7 @@ class RuntimeConfigs {
 
   static GlobalKey<NavigatorState> navigatorKey =
       Get.find<GlobalKey<NavigatorState>>();
-
-  // static const bool supportsLandscape = true;
-  static const bool supportsPortrait = true;
-
+  static bool isLoggedIn = false;    
   static double screenHeight =
       MediaQuery.of(navigatorKey.currentContext!).size.height;
   static double screenWidth =

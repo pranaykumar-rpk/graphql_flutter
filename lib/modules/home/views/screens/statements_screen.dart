@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/instance_manager.dart';
+import 'package:graphql_example/global/routing/custom_routing.dart';
+import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/models/statement_model.dart';
@@ -25,8 +27,9 @@ class _StatementsScreenState extends State<StatementsScreen> {
   }
 
   void _gotoPdfViewer() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const PdfViewerScreen()));
+    CustomRouting.pushNamed(NamedRoutes.pdfViewer.path);
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => const PdfViewerScreen()));
   }
 
   getStatementsYear(List<StatementModel> list) {

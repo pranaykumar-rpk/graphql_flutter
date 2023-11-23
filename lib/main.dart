@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'GraphQL',
       theme: appTheme,
       routerConfig: router,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

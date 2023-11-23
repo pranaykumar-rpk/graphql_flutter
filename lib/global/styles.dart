@@ -72,5 +72,5 @@ InputDecoration getInputDecoration(
           width: 1.0,
         ),
       ),
-      errorStyle: const TextStyle(height: 0.0, fontSize: 0.0));
+      errorStyle: const TextStyle(color: AppColors.error, fontSize: 10.0));
 }

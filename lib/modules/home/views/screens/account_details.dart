@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/instance_manager.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_example/global/app_colors.dart';
 import 'package:graphql_example/global/routing/custom_routing.dart';
 import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
+import 'package:graphql_example/modules/home/models/account_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
-import 'package:graphql_example/modules/home/views/screens/home_screen.dart';
-import 'package:graphql_example/modules/home/views/screens/transactions_screen.dart';
 
 class AccountDetails extends StatefulWidget {
   const AccountDetails({super.key});
@@ -29,11 +27,15 @@ class _AccountDetailsState extends State<AccountDetails> {
     super.initState();
   }
 
-  void _navigateToTransactions() {
+  void _navigateToTransactions(AccountModel account) {
     print("Navigating to transactions screen");
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const TransactionsScreen();
-    }));
+    CustomRouting.pushNamed(NamedRoutes.transactions.path, arguments: {
+      "accountHolder": account.accountHolder ?? "",
+      "accountNumber": account.accountNumber ?? "",
+      "accountType": account.accountType ?? "",
+      "balance": (account.balance ?? 0).toString(),
+      "id": account.id ?? '',
+    });
   }
 
   @override
@@ -67,7 +69,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                 itemCount: state.accounts.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: _navigateToTransactions,
+                    onTap: () => _navigateToTransactions(state.accounts[index]),
                     child: Card(
                         child: Padding(
                       padding: const EdgeInsets.all(16.0),
