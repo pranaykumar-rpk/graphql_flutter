@@ -5,7 +5,7 @@ class GraphQLService {
   //for android emulator
   //final httpLink = HttpLink("http://10.0.2.2:4000/");
   //for real device if connected on same lan: change ip address to your pc's ip address
-  static final httpLink = HttpLink("http://192.168.1.3:4000/");
+  static final httpLink = HttpLink("http://192.168.1.2:4000/");
 
   static Future<Map<String, dynamic>?> fetchHomeData() async {
     GraphQLClient client = GraphQLClient(link: httpLink, cache: GraphQLCache());

@@ -10,6 +10,12 @@ TextStyle snackDescription = const TextStyle(
   fontWeight: FontWeight.w500,
 );
 
+TextStyle sectionTitleTextStyle = const TextStyle(
+  color: AppColors.ashGrey,
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+);
+
 ThemeData appTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     useMaterial3: true,

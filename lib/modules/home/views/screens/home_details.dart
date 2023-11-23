@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/instance_manager.dart';
 import 'package:graphql_example/global/app_colors.dart';
-import 'package:graphql_example/global/buttons/primary_button.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/views/widgets/home_account_details.dart';
@@ -47,6 +44,9 @@ class _HomeDetailsState extends State<HomeDetails> {
               if (state.isLoadingHomeData) {
                 //return const Center(child: CircularProgressIndicator());
                 return const HomeLoading();
+              }
+              if (state.homeData == null) {
+                return const Center(child: Text("Unable to connect to server."));
               }
               return HomeAccountDetails(data: state.homeData!);
             }),

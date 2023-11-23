@@ -35,6 +35,7 @@ class HomeController extends Cubit<HomeStateModel> {
       emit(state.copyWith(isLoadingHomeData: false));
       print('Error calling home feed');
       print(e.toString());
+      showSnackBar(title: 'Unable to connect to server');
     }
   }
 
