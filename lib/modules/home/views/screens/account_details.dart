@@ -55,7 +55,7 @@ class _AccountDetailsState extends State<AccountDetails> {
       body: BlocBuilder<HomeController, HomeStateModel>(
           bloc: controller,
           builder: (context, state) {
-            if (state.isLoading) {
+            if (state.isLoadingAccountsData) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

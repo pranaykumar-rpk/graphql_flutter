@@ -57,3 +57,83 @@ void showSnackBar(
     },
   );
 }
+
+String getHomeQuery() {
+  return """query getHome {
+  home {
+    name
+    accountNumber
+    balance
+    currency
+    address {
+      streetName
+      buildingNumber
+      townName
+      postCode
+      country
+    }
+    recentTransactions {
+      date
+      description
+      amount
+      fromAccount
+      toAccount
+    }
+    upcomingBills {
+      date
+      description
+      amount
+      fromAccount
+      toAccount
+    }
+  }
+}
+""";
+}
+
+String getAccountsQuery() {
+  return """query getAccounts {
+  accounts {
+    id
+    accountNumber
+    accountType
+    balance
+    accountHolder
+  }
+}""";
+}
+
+String getTransactionsQuery() {
+  return """
+query getTransactions {
+  transactions {
+    date
+    description
+    amount
+    fromAccount
+    toAccount
+  }
+}
+""";
+}
+
+String getStatementsQuery() {
+  return """
+query getStatements {
+  statements {
+    date
+    description
+    amount
+  }
+}
+
+""";
+}
+
+String getContactsQuery() {
+  return """
+query getContacts {
+  contacts
+}
+""";
+}

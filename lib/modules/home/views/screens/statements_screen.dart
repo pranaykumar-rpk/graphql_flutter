@@ -73,7 +73,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
         body: BlocBuilder<HomeController, HomeStateModel>(
           bloc: homeController,
           builder: (context, state) {
-            if (state.isLoading) {
+            if (state.isLoadingStatementsData) {
               return const Center(child: CircularProgressIndicator());
             }
             if (state.statements.isEmpty) {

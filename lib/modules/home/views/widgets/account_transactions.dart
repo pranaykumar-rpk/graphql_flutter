@@ -28,7 +28,7 @@ class _AccountTransactionsState extends State<AccountTransactions> {
     return BlocBuilder<HomeController, HomeStateModel>(
         bloc: homeController,
         builder: (context, state) {
-          if (state.isLoading) {
+          if (state.isLoadingTransactionsData) {
             return const Center(child: CircularProgressIndicator());
           }
           if (state.transactions.isEmpty) {
