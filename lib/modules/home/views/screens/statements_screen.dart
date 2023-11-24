@@ -6,7 +6,7 @@ import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/models/statement_model.dart';
-import 'package:graphql_example/modules/home/views/screens/pdf_viewer_screen.dart';
+import 'package:graphql_example/modules/home/views/widgets/statement_card.dart';
 
 class StatementsScreen extends StatefulWidget {
   const StatementsScreen({super.key});
@@ -17,6 +17,7 @@ class StatementsScreen extends StatefulWidget {
 
 class _StatementsScreenState extends State<StatementsScreen> {
   final HomeController homeController = Get.find<HomeController>();
+  String selectedYear = '2019';
 
   @override
   void initState() {
@@ -43,15 +44,12 @@ class _StatementsScreenState extends State<StatementsScreen> {
     }
     List<Widget> statements = [];
     for (var element in list) {
-      statements.add(Card(
-        child: InkWell(
-          onTap: _gotoPdfViewer,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: Text(element.description ?? ""),
-              subtitle: Text(element.amount.toString()),
-            ),
+      statements.add(InkWell(
+        onTap: _gotoPdfViewer,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: StatementCard(
+            transaction: element,
           ),
         ),
       ));
@@ -73,41 +71,66 @@ class _StatementsScreenState extends State<StatementsScreen> {
         body: BlocBuilder<HomeController, HomeStateModel>(
           bloc: homeController,
           builder: (context, state) {
-            if (state.isLoadingStatementsData) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state.statements.isEmpty) {
-              return const Center(
-                child: Text("No statements found"),
-              );
-            }
-            Map<String, List<StatementModel>> statementsMap =
-                homeController.getStatementsMap();
-            print('Statements map: $statementsMap');
-            print('statements keys: ${statementsMap.keys}');
-            for (var element in statementsMap.keys) {
-              print('element: $element');
-              print('statementsMap[element]: ${statementsMap[element]}');
-            }
-            return SingleChildScrollView(
-                child: Column(children: [
-              ExpansionTile(
-                title: const Text('2023'),
-                children: getStatementsYear(statementsMap['2023'] ?? []),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      items: const [
+                        DropdownMenuItem(
+                          value: '2019',
+                          child: Text('2019'),
+                        ),
+                        DropdownMenuItem(
+                          value: '2020',
+                          child: Text('2020'),
+                        ),
+                        DropdownMenuItem(
+                          value: '2021',
+                          child: Text('2021'),
+                        ),
+                        DropdownMenuItem(
+                          value: '2022',
+                          child: Text('2022'),
+                        ),
+                        DropdownMenuItem(
+                          value: '2023',
+                          child: Text('2023'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedYear = value!;
+                        });
+                      },
+                      value: selectedYear,
+                    ),
+                  ),
+                  Expanded(
+                    child: Builder(builder: (context) {
+                      if (state.isLoadingStatementsData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (state.statements.isEmpty) {
+                        return const Center(
+                          child: Text("No statements found"),
+                        );
+                      }
+                      Map<String, List<StatementModel>> statementsMap =
+                          homeController.getStatementsMap();
+                      return Expanded(
+                        child: ListView(
+                            children: getStatementsYear(
+                                statementsMap[selectedYear] ?? [])),
+                      );
+                    }),
+                  )
+                ],
               ),
-              ExpansionTile(
-                  title: const Text('2022'),
-                  children: getStatementsYear(statementsMap['2022'] ?? [])),
-              ExpansionTile(
-                  title: const Text('2021'),
-                  children: getStatementsYear(statementsMap['2021'] ?? [])),
-              ExpansionTile(
-                  title: const Text('2020'),
-                  children: getStatementsYear(statementsMap['2020'] ?? [])),
-              ExpansionTile(
-                  title: const Text('2019'),
-                  children: getStatementsYear(statementsMap['2019'] ?? [])),
-            ]));
+            );
           },
         ));
   }

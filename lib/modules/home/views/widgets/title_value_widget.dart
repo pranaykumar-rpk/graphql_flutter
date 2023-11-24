@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_example/global/app_colors.dart';
 
 class TitleValueWidget extends StatelessWidget {
   final String title;
@@ -16,17 +17,33 @@ class TitleValueWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [Text('$title:'), Text(value)],
+        children: [
+          Text(
+            '$title:',
+            style: const TextStyle(
+                color: AppColors.ashGrey, fontWeight: FontWeight.w500),
+          ),
+          Text(
+            value,
+            style: const TextStyle(color: AppColors.primary, fontSize: 14),
+          )
+        ],
       );
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: Text(title)),
+        Expanded(
+            child: Text(
+          title,
+          style: const TextStyle(
+              color: AppColors.ashGrey, fontWeight: FontWeight.w500),
+        )),
         const Text(':'),
         Expanded(
             child: Text(
           value,
+          style: const TextStyle(color: AppColors.primary, fontSize: 14),
           textAlign: TextAlign.end,
         )),
       ],

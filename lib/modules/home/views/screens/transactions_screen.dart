@@ -39,9 +39,11 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       TitleValueWidget(
                           title: 'Account number',
                           value: widget.accountNumber ?? 'abcd'),
+                      const SizedBox(
+                        height: 4,
+                      ),
                       TitleValueWidget(
-                          title: 'Balance',
-                          value: (widget.balance ?? 0).toString())
+                          title: 'Balance', value: '\$ ${widget.balance ?? 0}')
                     ],
                   ),
                 ),

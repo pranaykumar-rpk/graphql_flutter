@@ -7,6 +7,7 @@ import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
 import 'package:graphql_example/modules/home/models/account_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
+import 'package:graphql_example/modules/home/views/widgets/account_card.dart';
 
 class AccountDetails extends StatefulWidget {
   const AccountDetails({super.key});
@@ -65,25 +66,19 @@ class _AccountDetailsState extends State<AccountDetails> {
                 child: Text('No Accounts found'),
               );
             }
-            return ListView.builder(
-                itemCount: state.accounts.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () => _navigateToTransactions(state.accounts[index]),
-                    child: Card(
-                        child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(state.accounts[index].accountHolder ?? "Name"),
-                          Text(state.accounts[index].accountNumber ??
-                              "Account number"),
-                        ],
-                      ),
-                    )),
-                  );
-                });
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                  itemCount: state.accounts.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                        onTap: () =>
+                            _navigateToTransactions(state.accounts[index]),
+                        child: AccountTile(
+                          account: state.accounts[index],
+                        ));
+                  }),
+            );
           }),
     );
   }
