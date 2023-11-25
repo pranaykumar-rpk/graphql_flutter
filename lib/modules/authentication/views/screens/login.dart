@@ -70,7 +70,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) {
                       return PrimaryButton(
-                        // isDisabled: RuntimeConfigs.isTesting? false:formGroup.invalid,
+                        isDisabled: RuntimeConfigs.isWidgetTesting
+                            ? false
+                            : formGroup.invalid,
                         isLoading: state.isLoading,
                         height: 50,
                         onPressed: loginController.validateCredentials,

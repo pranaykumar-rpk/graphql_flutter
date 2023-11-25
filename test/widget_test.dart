@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql_example/global/buttons/primary_button.dart';
+import 'package:graphql_example/global/runtime_configs.dart';
 import 'package:graphql_example/main.dart';
 import 'package:nock/nock.dart';
 
@@ -14,7 +15,7 @@ void main() async {
 
   testWidgets('App UI Test', (WidgetTester tester) async {
     WidgetsFlutterBinding.ensureInitialized();
-
+    RuntimeConfigs.isWidgetTesting = true;
     await tester.pumpWidget(const MyApp());
 
     await tester.tap(find.byType(PrimaryButton));
