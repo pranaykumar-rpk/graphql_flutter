@@ -12,64 +12,46 @@ class MockLoginStateModel extends Mock implements LoginStateModel {}
 
 void main() {
   RuntimeConfigs.isTesting = true;
+  late LoginController loginController;
+
+  setUp(() {
+    loginController = LoginController();
+  });
+
   group('LoginController', () {
-    late MockLoginController loginController;
-
-    setUp(() {
-      loginController = MockLoginController();
+    test('Check Initial values are correct', () {
+      expect(loginController.state.isLoading, equals(false));
+      expect(loginController.state.showPassword, equals(false));
+      expect(
+          loginController.loginForm.controls['userName']?.value, equals(null));
+      expect(
+          loginController.loginForm.controls['password']?.value, equals(null));
     });
 
-    test("Verify Initial values are correct", () {
-      expect(loginController.state.isLoading, false);
-      expect(loginController.state.showPassword, false);
-      expect(loginController.loginForm.controls['userName']?.value, null);
-      expect(loginController.loginForm.controls['password']?.value, null);
-    });
-
-    blocTest<MockLoginController, LoginStateModel>(
-      'emits loading state, then success state',
-      build: () => loginController,
-      act: (controller) async {
-        await controller.validateCredentials();
-      },
-      expect: () => [
-        (loginController.state.isLoading, true),
-        (loginController.state.isLoading, false),
-      ],
-    );
-
+    //intial state
     blocTest<LoginController, LoginStateModel>(
-      'toggles password visibility',
-      build: () => loginController,
-      act: (controller) async {
-        controller.toggleVisibility();
-      },
-      expect: () => [
-        LoginStateModel(showPassword: true),
-      ],
-    );
+        'Initial stage of LoginController',
+        build: () => loginController,
+        expect: () => []);
 
-    blocTest<LoginController, LoginStateModel>(
-      'emits loading state, then success state with correct userName',
-      build: () => loginController,
-      act: (controller) async {
-        // Mocking the form controls using mocktail
-        when(() => controller.loginForm.controls['userName']?.value)
-            .thenReturn(() => 'testUser');
-        when(() => controller.loginForm.controls['password']?.value)
-            .thenReturn(() => 'testPassword');
+    blocTest<LoginController, LoginStateModel>('Test toggle visibility',
+        build: () => loginController,
+        act: (c) {
+          loginController.toggleVisibility();
+        },
+        expect: () => [LoginStateModel(showPassword: true)]);
 
-        await controller.validateCredentials();
-      },
-      expect: () => [
-        LoginStateModel(isLoading: true),
-        LoginStateModel(isLoading: false),
-      ],
-      verify: (controller) {
-        // Add verification logic here
-        verify(() => controller.loginForm.controls['userName']?.value)
-            .called(1);
-      },
-    );
+    blocTest<LoginController, LoginStateModel>('Test validate credentials',
+        build: () => loginController,
+        act: (c) async {
+          loginController.loginForm.controls['userName']?.updateValue('test');
+          loginController.loginForm.controls['password']
+              ?.updateValue('Password');
+          await loginController.validateCredentials();
+        },
+        expect: () => [
+              LoginStateModel(isLoading: true),
+              LoginStateModel(isLoading: false)
+            ]);
   });
 }

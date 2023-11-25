@@ -1,9 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:graphql_example/modules/home/controllers/home_controller.dart';
+import 'package:graphql_example/modules/home/models/home_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
 import 'package:graphql_example/modules/home/repositories/home_repository.dart';
+import 'package:mockito/mockito.dart';
 
 class MockHomeRepository extends Mock implements HomeRepository {}
 
@@ -14,42 +15,62 @@ class MockHomeStateModel extends Mock implements HomeStateModel {}
 
 void main() {
   group('HomeController', () {
-    late MockHomeController homeController;
+    late HomeController homeController;
     late MockHomeRepository mockRepository;
 
     setUp(() {
       mockRepository = MockHomeRepository();
-      homeController = MockHomeController();
+      homeController = HomeController();
       homeController.respository = mockRepository;
     });
 
-    blocTest(
-      'emits loading and success states for fetchHomeData',
+    tearDown(() {
+      reset(mockRepository);
+      homeController.close();
+    });
+
+    test('Check Initial values are correct', () {
+      expect(homeController.state.isLoading, equals(false));
+      expect(homeController.state.isLoadingHomeData, equals(false));
+      expect(homeController.state.isLoadingAccountsData, equals(false));
+      expect(homeController.state.isLoadingTransactionsData, equals(false));
+      expect(homeController.state.isLoadingStatementsData, equals(false));
+      expect(homeController.state.homeData, equals(null));
+      expect(homeController.state.accounts, equals([]));
+      expect(homeController.state.transactions, equals([]));
+      expect(homeController.state.statements, equals([]));
+      expect(homeController.state.selectedIndex, equals(0));
+    });
+
+    blocTest<HomeController, HomeStateModel>(
+      'Check Home feed API method',
       build: () => homeController,
-      act: (MockHomeController controller) async {
-        when(controller.fetchData()).thenAnswer((_) async {});
+      act: (controller) async {
+        when(mockRepository.fetchHomeData()).thenAnswer((_) async => {});
+        await controller.fetchData();
       },
       expect: () => [
-        expect(homeController.state.isLoadingHomeData, true),
-        expect(homeController.state.isLoadingHomeData, false),
+        HomeStateModel(isLoadingHomeData: true),
+        HomeStateModel(isLoadingHomeData: false),
+        HomeStateModel(homeData: HomeModel()),
       ],
     );
 
     blocTest<HomeController, HomeStateModel>(
-      'emits loading and success states for fetchAccountsData',
+      'Check the account details API method',
       build: () => homeController,
       act: (controller) async {
-        when(mockRepository.fetchAccountsData()).thenAnswer((_) async => {});
+        // when(mockRepository.fetchAccountsData()).thenAnswer((_) async => {});
         await controller.fetchAcoountDetails();
       },
       expect: () => [
-        expect(homeController.state.isLoadingAccountsData, true),
-        expect(homeController.state.isLoadingAccountsData, false),
+        HomeStateModel(isLoadingAccountsData: true),
+        HomeStateModel(isLoadingAccountsData: false),
       ],
     );
 
     blocTest<HomeController, HomeStateModel>(
-      'emits loading and success states for fetchTransactionsData',
+      'Check the transaction API method',
       build: () => homeController,
       act: (controller) async {
         when(mockRepository.fetchTransactionsData())
@@ -57,27 +78,22 @@ void main() {
         await controller.fetchTransactions();
       },
       expect: () => [
-        (state) => expect(state.isLoadingTransactionsData, true),
-        (state) => expect(state.isLoadingTransactionsData, false),
+        HomeStateModel(isLoadingTransactionsData: true),
+        HomeStateModel(isLoadingTransactionsData: false),
       ],
     );
 
     blocTest<HomeController, HomeStateModel>(
-      'emits loading and success states for fetchStatementsData',
+      'Check the statements API method',
       build: () => homeController,
       act: (controller) async {
         when(mockRepository.fetchStatementsData()).thenAnswer((_) async => {});
         await controller.fetchStatements();
       },
       expect: () => [
-        (state) => expect(state.isLoadingStatementsData, true),
-        (state) => expect(state.isLoadingStatementsData, false),
+        HomeStateModel(isLoadingStatementsData: true),
+        HomeStateModel(isLoadingStatementsData: false),
       ],
     );
-
-    tearDown(() {
-      reset(mockRepository);
-      homeController.close();
-    });
   });
 }

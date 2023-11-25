@@ -24,12 +24,11 @@ class LoginController extends Cubit<LoginStateModel> {
       emit(state.copyWith(isLoading: false));
       RuntimeConfigs.isLoggedIn = true;
       String userName = (loginForm.controls["userName"]?.value ?? "") as String;
+      if (RuntimeConfigs.isTesting) {
+        return;
+      }
       CustomRouting.goToRoute(NamedRoutes.home.path,
           extra: {"userName": userName});
-      // if (RuntimeConfigs.isWidgetTesting || !RuntimeConfigs.isTesting) {
-      //   CustomRouting.goToRoute(NamedRoutes.home.path,
-      //       extra: {"userName": userName});
-      // }
     });
   }
 

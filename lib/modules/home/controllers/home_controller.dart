@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_example/global/constants.dart';
 import 'package:graphql_example/global/helper_functions.dart';
+import 'package:graphql_example/global/runtime_configs.dart';
 import 'package:graphql_example/modules/home/models/accounts_model.dart';
 import 'package:graphql_example/modules/home/models/home_model.dart';
 import 'package:graphql_example/modules/home/models/home_state_model.dart';
@@ -42,19 +43,19 @@ class HomeController extends Cubit<HomeStateModel> {
   Future<void> fetchAcoountDetails() async {
     emit(state.copyWith(isLoadingAccountsData: true));
     try {
-      print('Calling homefeed api');
       dynamic result = await respository.fetchAccountsData();
       emit(state.copyWith(isLoadingAccountsData: false));
-      print("Respone from home feed");
       print(result.toString());
       if (result == null || result == {} || result == []) {
+        if (RuntimeConfigs.isTesting) {
+          return;
+        }
         showSnackBar(title: "Error loading data", type: SnackType.error);
       } else {
         AccountsModel model = AccountsModel.fromJson(result);
         emit(state.copyWith(accounts: model.accounts));
       }
     } catch (e) {
-      emit(state.copyWith(isLoadingAccountsData: false));
       print('Error calling home feed');
       print(e.toString());
     }
@@ -69,6 +70,9 @@ class HomeController extends Cubit<HomeStateModel> {
       print("Respone from transactions feed");
       print(result.toString());
       if (result == null || result == {} || result == []) {
+        if (RuntimeConfigs.isTesting) {
+          return;
+        }
         showSnackBar(
             title: "Error loading transactions", type: SnackType.error);
       } else {
@@ -77,7 +81,6 @@ class HomeController extends Cubit<HomeStateModel> {
         print('state.transactions:${state.transactions}');
       }
     } catch (e) {
-      emit(state.copyWith(isLoadingTransactionsData: false));
       print('Error calling home feed');
       print(e.toString());
     }
@@ -92,13 +95,15 @@ class HomeController extends Cubit<HomeStateModel> {
       print("Respone from Statements feed");
       print(result.toString());
       if (result == null || result == {} || result == []) {
+        if (RuntimeConfigs.isTesting) {
+          return;
+        }
         showSnackBar(title: "Error loading Statements", type: SnackType.error);
       } else {
         StatementsModel model = StatementsModel.fromJson(result);
         emit(state.copyWith(statements: model.statements));
       }
     } catch (e) {
-      emit(state.copyWith(isLoadingStatementsData: false));
       print('Error calling home feed');
       print(e.toString());
     }
@@ -124,7 +129,6 @@ class HomeController extends Cubit<HomeStateModel> {
       Map<String, dynamic> result = await respository.fetchContactsData();
       print('result from contats api: $result');
       emit(state.copyWith(isLoading: false));
-
       if (result["isSuccess"] ?? false) {
       } else {
         String error = result["message"];
@@ -136,7 +140,6 @@ class HomeController extends Cubit<HomeStateModel> {
             type: SnackType.error);
       }
     } catch (e) {
-      emit(state.copyWith(isLoading: false));
       print(e.toString());
     }
   }
