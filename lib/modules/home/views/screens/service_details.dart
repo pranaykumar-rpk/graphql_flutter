@@ -3,8 +3,6 @@ import 'package:graphql_example/global/constants.dart';
 import 'package:graphql_example/global/helper_functions.dart';
 import 'package:graphql_example/global/routing/custom_routing.dart';
 import 'package:graphql_example/global/routing/routes.dart';
-import 'package:graphql_example/modules/home/views/screens/contacts_screen.dart';
-import 'package:graphql_example/modules/home/views/screens/statements_screen.dart';
 
 class ServiceDetails extends StatefulWidget {
   const ServiceDetails({super.key});

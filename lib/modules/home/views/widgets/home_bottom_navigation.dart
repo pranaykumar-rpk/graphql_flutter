@@ -27,6 +27,7 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
         bloc: homeController,
         builder: (context, state) {
           return BottomNavigationBar(
+            key: const Key('bottom_nav_bar'),
             selectedItemColor: AppColors.primary,
             selectedLabelStyle: const TextStyle(color: AppColors.primary),
             onTap: _handleOnTap,
@@ -52,6 +53,7 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
               ),
               BottomNavigationBarItem(
                 icon: CommonIcon(
+                  key: const Key('service_item'),
                   fileName: 'service',
                   color: state.selectedIndex == 2
                       ? AppColors.primary

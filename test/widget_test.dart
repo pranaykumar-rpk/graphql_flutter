@@ -1,30 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:graphql_example/global/buttons/primary_button.dart';
 import 'package:graphql_example/main.dart';
+import 'package:nock/nock.dart';
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUpAll(nock.init);
+
+  setUp(() {
+    nock.cleanAll();
+  });
+
+  testWidgets('App UI Test', (WidgetTester tester) async {
+    WidgetsFlutterBinding.ensureInitialized();
+
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.tap(find.byType(PrimaryButton));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.text('Accounts'), findsOneWidget);
+    expect(find.text('Services'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('service_item')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Loans'), findsOneWidget);
+    await tester.tap(find.text('Loans'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Statements'));
+    await tester.pumpAndSettle();
+    await tester.pageBack();
+
+    // await tester.tap(find.text('Contacts'));
+    // await tester.pumpAndSettle();
+
+    // expect(find.text('Contacts'), findsOneWidget);
+
+    // await tester.pageBack();
   });
 }

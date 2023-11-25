@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/instance_manager.dart';
 import 'package:graphql_example/global/app_colors.dart';
 import 'package:graphql_example/global/buttons/primary_button.dart';
+import 'package:graphql_example/global/runtime_configs.dart';
 import 'package:graphql_example/global/styles.dart';
 import 'package:graphql_example/modules/authentication/controllers/login_controller.dart';
 import 'package:graphql_example/modules/authentication/models/login_state_model.dart';
@@ -21,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login', style: appBarTitleTextStyle)),
+      appBar: AppBar(
+          title: const Text('Login Screen', style: appBarTitleTextStyle)),
       body: BlocBuilder<LoginController, LoginStateModel>(
         bloc: loginController,
         builder: (context, state) {
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) {
                       return PrimaryButton(
-                        isDisabled: formGroup.invalid,
+                        // isDisabled: RuntimeConfigs.isTesting? false:formGroup.invalid,
                         isLoading: state.isLoading,
                         height: 50,
                         onPressed: loginController.validateCredentials,

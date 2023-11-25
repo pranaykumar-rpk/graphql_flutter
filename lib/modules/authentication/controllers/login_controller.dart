@@ -1,8 +1,4 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:graphql_example/global/routing/custom_routing.dart';
 import 'package:graphql_example/global/routing/routes.dart';
 import 'package:graphql_example/global/runtime_configs.dart';
@@ -12,8 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 class LoginController extends Cubit<LoginStateModel> {
   LoginController() : super(LoginStateModel());
 
-  FormGroup loginForm = FormGroup(
-    {
+  FormGroup loginForm = FormGroup({
     'userName': FormControl<String>(
         validators: [Validators.required, Validators.minLength(4)]),
     'password': FormControl<String>(validators: [
@@ -31,6 +26,10 @@ class LoginController extends Cubit<LoginStateModel> {
       String userName = (loginForm.controls["userName"]?.value ?? "") as String;
       CustomRouting.goToRoute(NamedRoutes.home.path,
           extra: {"userName": userName});
+      // if (RuntimeConfigs.isWidgetTesting || !RuntimeConfigs.isTesting) {
+      //   CustomRouting.goToRoute(NamedRoutes.home.path,
+      //       extra: {"userName": userName});
+      // }
     });
   }
 

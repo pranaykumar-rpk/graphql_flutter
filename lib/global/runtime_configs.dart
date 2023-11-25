@@ -13,7 +13,9 @@ class RuntimeConfigs {
 
   static GlobalKey<NavigatorState> navigatorKey =
       Get.find<GlobalKey<NavigatorState>>();
-  static bool isLoggedIn = false;    
+  static bool isTesting = false;
+  static bool isWidgetTesting = false;
+  static bool isLoggedIn = false;
   static double screenHeight =
       MediaQuery.of(navigatorKey.currentContext!).size.height;
   static double screenWidth =
