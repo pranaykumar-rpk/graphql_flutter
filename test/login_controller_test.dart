@@ -8,6 +8,8 @@ import 'package:mockito/mockito.dart';
 class MockLoginController extends MockCubit<LoginStateModel>
     implements LoginController {}
 
+class MockLoginStateModel extends Mock implements LoginStateModel {}
+
 void main() {
   RuntimeConfigs.isTesting = true;
   group('LoginController', () {
